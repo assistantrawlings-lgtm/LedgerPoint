@@ -9,7 +9,7 @@ if [[ -f "$ENV_FILE" ]]; then
   set +a
 fi
 
-AWS_REGION="${AWS_REGION:-eu-north-1}"
+AWS_REGION="${AWS_REGION:-us-east-1}"
 BUCKET_NAME="${BUCKET_NAME:-}"
 PREFIX="${PREFIX:-client-files}"
 LOG_FILE="${LOG_FILE:-$WORKDIR/logs/audit.log}"

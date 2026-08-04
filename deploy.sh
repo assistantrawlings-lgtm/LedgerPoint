@@ -2,7 +2,7 @@
 set -euo pipefail
 
 WORKDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-AWS_REGION="${AWS_REGION:-eu-north-1}"
+AWS_REGION="${AWS_REGION:-us-east-1}"
 BUCKET_NAME="${BUCKET_NAME:-ledgerpoint-$(date +%s | tail -c 8)}"
 PREFIX="${PREFIX:-client-files}"
 LOG_FILE="${LOG_FILE:-$WORKDIR/logs/audit.log}"
@@ -20,10 +20,13 @@ require_aws() {
 
 require_aws
 
-if [[ "$AWS_REGION" == "eu-north-1" ]]; then
-  aws s3api create-bucket --bucket "$BUCKET_NAME" --region "$AWS_REGION" > /dev/null 2>&1 || true
+if [[ "$AWS_REGION" == "us-east-1" ]]; then
+  aws s3api create-bucket --bucket "$BUCKET_NAME" --region "$AWS_REGION"
 else
-  aws s3api create-bucket --bucket "$BUCKET_NAME" --region "$AWS_REGION" --create-bucket-configuration "LocationConstraint=$AWS_REGION" > /dev/null 2>&1 || true
+  aws s3api create-bucket \
+    --bucket "$BUCKET_NAME" \
+    --region "$AWS_REGION" \
+    --create-bucket-configuration "LocationConstraint=$AWS_REGION"
 fi
 
 aws s3api put-public-access-block \
