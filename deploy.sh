@@ -21,20 +21,20 @@ require_aws() {
 require_aws
 
 if [[ "$AWS_REGION" == "eu-north-1" ]]; then
-  aws s3api create-bucket --bucket "$BUCKET_NAME" --region "$AWS_REGION" --output none 2>/dev/null || true
+  aws s3api create-bucket --bucket "$BUCKET_NAME" --region "$AWS_REGION" > /dev/null 2>&1 || true
 else
-  aws s3api create-bucket --bucket "$BUCKET_NAME" --region "$AWS_REGION" --create-bucket-configuration "LocationConstraint=$AWS_REGION" --output none 2>/dev/null || true
+  aws s3api create-bucket --bucket "$BUCKET_NAME" --region "$AWS_REGION" --create-bucket-configuration "LocationConstraint=$AWS_REGION" > /dev/null 2>&1 || true
 fi
 
 aws s3api put-public-access-block \
   --bucket "$BUCKET_NAME" \
   --public-access-block-configuration "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true" \
-  --output none
+  > /dev/null
 
 aws s3api put-bucket-versioning \
   --bucket "$BUCKET_NAME" \
   --versioning-configuration Status=Enabled \
-  --output none
+  > /dev/null
 
 log "Created private S3 bucket $BUCKET_NAME in $AWS_REGION"
 
