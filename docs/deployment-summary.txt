@@ -1,0 +1,6 @@
+Deployment summary
+==================
+Region: us-east-1
+Bucket: ledgerpoint-5878420
+Prefix: client-files
+Audit log: /c/Users/MR. ROWLINGS/Desktop/Techcrush/capstone/LedgerPoint/logs/audit.log

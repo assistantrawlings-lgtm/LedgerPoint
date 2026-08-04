@@ -1,0 +1,18 @@
+# Environment / secrets — never commit real credentials or bucket names
+.env
+
+# AWS CLI local config (if it ever ends up in the repo folder)
+.aws/
+
+# Logs — local audit trail, not something to version-control
+logs/*.log
+
+# OS/editor cruft
+.DS_Store
+*.swp
+.vscode/settings.json
+
+# Test artifacts you might create while validating the CLI
+test-statement.pdf
+
+logs/*.log
